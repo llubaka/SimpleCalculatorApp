@@ -61,11 +61,16 @@ namespace SimpleCalculatorApp
         {
             if (s.Length > 2)
             {
+                int lastIndex = s.Length;
                 int index = s.Length - 3;
-                if ((s.Substring(index).Equals(Operators.Divide)) ||
+                if (((s.Substring(index).Equals(Operators.Divide)) ||
                         (s.Substring(index).Equals(Operators.Minus)) ||
                         (s.Substring(index).Equals(Operators.Multi)) ||
-                        (s.Substring(index).Equals(Operators.Plus)))
+                        (s.Substring(index).Equals(Operators.Plus))) ||
+                        (s[lastIndex - 1].Equals('/')) ||
+                        (s[lastIndex - 1].Equals('-')) ||
+                        (s[lastIndex - 1].Equals('x')) ||
+                        (s[lastIndex - 1].Equals('+')))
                 {
                     return true;
                 }

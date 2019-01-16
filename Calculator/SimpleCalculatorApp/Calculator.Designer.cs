@@ -133,6 +133,7 @@
             this.DotButton.TabIndex = 18;
             this.DotButton.Text = ".";
             this.DotButton.UseVisualStyleBackColor = true;
+            this.DotButton.Click += new System.EventHandler(this.DotButton_Click_1);
             // 
             // ZeroButton
             // 

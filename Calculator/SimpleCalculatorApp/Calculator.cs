@@ -72,7 +72,7 @@ namespace SimpleCalculatorApp
         {
             if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
             {
-                this.UserInputText.Text += Operators.Plus;
+                this.UserInputText.Text += Operators.Divide;
             }
         }
 
@@ -170,8 +170,16 @@ namespace SimpleCalculatorApp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DotButton_Click(object sender, EventArgs e)
+        private void DotButton_Click_1(object sender, EventArgs e)
         {
+            if (this.UserInputText.Text.Contains("."))
+            {
+                // do nothing
+            }
+            else
+            {
+                this.UserInputText.Text += ".";
+            }
 
         }
         #endregion
@@ -222,5 +230,6 @@ namespace SimpleCalculatorApp
         }
 
         #endregion
+              
     }
 }
