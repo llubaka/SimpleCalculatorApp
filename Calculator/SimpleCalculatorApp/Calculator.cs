@@ -70,34 +70,49 @@ namespace SimpleCalculatorApp
 
         private void DivideButton_Click(object sender, EventArgs e)
         {
-            if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
+            if (!IsRepeating(this.UserInputText.Text))
             {
                 this.UserInputText.Text += $" {Operators.Divide} ";
+            }
+            else
+            {
+                ReplaceOperator(Operators.Divide);
             }
         }
 
         private void MultiButton_Click(object sender, EventArgs e)
         {
-            if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
+            if (!IsRepeating(this.UserInputText.Text))
             {
                 this.UserInputText.Text += $" {Operators.Multi} ";
+            }
+            else
+            {
+                ReplaceOperator(Operators.Multi);
             }
         }
 
         private void MinusButton_Click(object sender, EventArgs e)
         {
-            if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
+            if (!IsRepeating(this.UserInputText.Text))
             {
                 this.UserInputText.Text += $" {Operators.Minus} ";
             }
+            else
+            {
+                ReplaceOperator(Operators.Minus);
+            }
         }
-
 
         private void PlusButton_Click(object sender, EventArgs e)
         {
-            if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
+            if (!IsRepeating(this.UserInputText.Text))
             {
                 this.UserInputText.Text += $" {Operators.Plus} ";
+            }
+            else
+            {
+                ReplaceOperator(Operators.Plus);
             }
         }
 
@@ -217,7 +232,7 @@ namespace SimpleCalculatorApp
         }
 
         #endregion
-
+        //remove bug where cant have 2 dots in the separate 2,0 + 2,1
         #region Dot Method
 
         /// <summary>
@@ -240,7 +255,7 @@ namespace SimpleCalculatorApp
         }
         #endregion
 
-        #region Private Helpers Methods
+        #region Private Helper Methods
 
         /// <summary>
         /// using this method to focus the User Input Text Box 
@@ -287,5 +302,67 @@ namespace SimpleCalculatorApp
 
         #endregion
 
+        #region Operator Helper Methods
+
+        /// <summary>
+        /// return true if the last button used is from Operator Buttons i.e.
+        /// used to prevent from stacking operators signs in the user unput text box 
+        /// </summary>
+        /// <param name="s"> user input text </param>
+        /// <returns></returns>
+        public static bool IsRepeating(string s)
+        {
+            if (s.Length > 2)
+            {
+                int lastIndex = s.Length;
+                int index = s.Length - 3;
+                if ((s.Contains(Operators.Divide)) ||
+                        (s.Contains(Operators.Minus)) ||
+                        (s.Contains(Operators.Multi)) ||
+                        (s.Contains(Operators.Plus)))
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else if (s.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+       /// <summary>
+       /// replacing the operator in the user input box 
+       /// </summary>
+       /// <param name="op"></param>
+        private void ReplaceOperator(string op)
+        {
+            if (this.UserInputText.Text.Contains("+"))
+            {
+                int operatorIndex = this.UserInputText.Text.IndexOf('+');
+                this.UserInputText.Text = this.UserInputText.Text.Replace('+', op[0]);
+            }
+            else if (this.UserInputText.Text.Contains("-"))
+            {
+                int operatorIndex = this.UserInputText.Text.IndexOf('-');
+                this.UserInputText.Text = this.UserInputText.Text.Replace('-', op[0]);
+            }
+            else if (this.UserInputText.Text.Contains("x"))
+            {
+                int operatorIndex = this.UserInputText.Text.IndexOf('x');
+                this.UserInputText.Text = this.UserInputText.Text.Replace('x', op[0]);
+            }
+            else
+            {
+                int operatorIndex = this.UserInputText.Text.IndexOf('/');
+                this.UserInputText.Text = this.UserInputText.Text.Replace('/', op[0]);
+            }
+        }
+
+        #endregion
     }
 }

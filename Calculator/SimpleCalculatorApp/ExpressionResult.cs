@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace SimpleCalculatorApp
 {
+    #region Calculate Methods
+
     /// <summary>
     /// The main methods needed to get the result of the expression in the user input box
     /// no error handling in this class
@@ -91,6 +93,7 @@ namespace SimpleCalculatorApp
                 }
             }
         }
-
     }
+
+    #endregion
 }

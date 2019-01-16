@@ -50,41 +50,6 @@ namespace SimpleCalculatorApp
             return sb.ToString();
         }
 
-        #endregion
-
-        #region Bool Method For Repeats of the operators
-
-        /// <summary>
-        /// return true if the last button used is from Operator Buttons i.e.
-        /// used to prevent from stacking operators signs in the user unput text box 
-        /// </summary>
-        /// <param name="s"> user input text </param>
-        /// <returns></returns>
-        public static bool IsRepeating(string s)
-        {
-            if (s.Length > 2)
-            {
-                int lastIndex = s.Length;
-                int index = s.Length - 3;
-                if ((s.Contains(Operators.Divide)) ||
-                        (s.Contains(Operators.Minus)) ||
-                        (s.Contains(Operators.Multi)) ||
-                        (s.Contains(Operators.Plus)))
-                {
-                    return true;
-                }
-                else return false;
-            }
-            else if (s.Length == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        #endregion
+        #endregion             
     }
 }
