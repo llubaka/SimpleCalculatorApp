@@ -103,7 +103,63 @@ namespace SimpleCalculatorApp
 
         private void EqualsButton_Click(object sender, EventArgs e)
         {
-            ExpressionResult.GetExpressionResult(this.UserInputText.Text);
+            if (IsResultable(this.UserInputText.Text))
+            {
+                this.UserInputText.Text = ExpressionResult.GetExpressionResult(this.UserInputText.Text);
+            }
+        }
+
+        #endregion
+
+        #region EqualsButton main verifications method(s)
+
+        private bool IsResultable(string text)
+        {            
+            if (IsValidExpression(text))
+            {
+                return true;
+            }
+            else
+            {
+
+                ShowMessageBox("Not a valid expression!");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// spliting the string with the operators and by this getting the array with two operands.
+        /// example. 100 + 200 , returning array with two values . More or less values in the string
+        /// is accepted as a bad format input text , bad expression
+        /// </summary>
+        /// <param name="text"> user input text </param>
+        /// <returns></returns>
+        private bool IsValidExpression(string text)
+        {
+            string[] values = text.Split(new char[] { '+', '-', 'x', '/' },StringSplitOptions.RemoveEmptyEntries);
+            double un = 0;
+            if (text.Length < 3)
+            {
+                return false;
+            }
+            else if (values.Length != 2) 
+            {
+                return false;
+            }
+
+            else if ((double.TryParse(values[0], out un)) && (double.TryParse(values[1], out un)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static void ShowMessageBox(string text)
+        {
+            MessageBox.Show(text);
         }
 
         #endregion
