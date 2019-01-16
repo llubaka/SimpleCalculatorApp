@@ -49,7 +49,7 @@
             this.DivideButton = new System.Windows.Forms.Button();
             this.DelButton = new System.Windows.Forms.Button();
             this.CEButton = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.ColorButton = new System.Windows.Forms.Button();
             this.ButtonsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,6 +102,7 @@
             this.ButtonsPanel.Controls.Add(this.DivideButton, 3, 0);
             this.ButtonsPanel.Controls.Add(this.DelButton, 2, 0);
             this.ButtonsPanel.Controls.Add(this.CEButton, 0, 0);
+            this.ButtonsPanel.Controls.Add(this.ColorButton, 1, 0);
             this.ButtonsPanel.Location = new System.Drawing.Point(12, 58);
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.RowCount = 5;
@@ -312,12 +313,16 @@
             this.CEButton.UseVisualStyleBackColor = true;
             this.CEButton.Click += new System.EventHandler(this.CEButton_Click);
             // 
-            // dateTimePicker1
+            // ColorButton
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(244, 233);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(408, 20);
-            this.dateTimePicker1.TabIndex = 3;
+            this.ColorButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ColorButton.Location = new System.Drawing.Point(58, 3);
+            this.ColorButton.Name = "ColorButton";
+            this.ColorButton.Size = new System.Drawing.Size(49, 34);
+            this.ColorButton.TabIndex = 20;
+            this.ColorButton.Text = "Font";
+            this.ColorButton.UseVisualStyleBackColor = true;
+            this.ColorButton.Click += new System.EventHandler(this.ColorButton_Click);
             // 
             // CalculatorForm
             // 
@@ -325,7 +330,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(244, 272);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.ButtonsPanel);
             this.Controls.Add(this.CalculationResultText);
             this.Controls.Add(this.UserInputText);
@@ -363,6 +367,6 @@
         private System.Windows.Forms.Button MinusButton;
         private System.Windows.Forms.Button MultiButton;
         private System.Windows.Forms.Button DivideButton;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button ColorButton;
     }
 }

@@ -129,7 +129,7 @@ namespace SimpleCalculatorApp
         #region EqualsButton main verifications method(s)
 
         private bool IsResultable(string text)
-        {            
+        {
             if (IsValidExpression(text))
             {
                 return true;
@@ -151,13 +151,13 @@ namespace SimpleCalculatorApp
         /// <returns></returns>
         private bool IsValidExpression(string text)
         {
-            string[] values = text.Split(new char[] { '+', '-', 'x', '/' },StringSplitOptions.RemoveEmptyEntries);
+            string[] values = text.Split(new char[] { '+', '-', 'x', '/' }, StringSplitOptions.RemoveEmptyEntries);
             double un = 0;
             if (text.Length < 3)
             {
                 return false;
             }
-            else if (values.Length != 2) 
+            else if (values.Length != 2)
             {
                 return false;
             }
@@ -232,7 +232,7 @@ namespace SimpleCalculatorApp
         }
 
         #endregion
-        //remove bug where cant have 2 dots in the separate 2,0 + 2,1
+        //remove bug where cant have 2 dots in the separate 2,0 + 2,1 , and dot doesnt work for expression result
         #region Dot Method
 
         /// <summary>
@@ -335,10 +335,10 @@ namespace SimpleCalculatorApp
             }
         }
 
-       /// <summary>
-       /// replacing the operator in the user input box 
-       /// </summary>
-       /// <param name="op"></param>
+        /// <summary>
+        /// replacing the operator in the user input box 
+        /// </summary>
+        /// <param name="op"></param>
         private void ReplaceOperator(string op)
         {
             if (this.UserInputText.Text.Contains("+"))
@@ -361,6 +361,56 @@ namespace SimpleCalculatorApp
                 int operatorIndex = this.UserInputText.Text.IndexOf('/');
                 this.UserInputText.Text = this.UserInputText.Text.Replace('/', op[0]);
             }
+        }
+
+        #endregion
+
+        #region Changing Calculator's color
+
+        /// <summary>
+        /// changing the calculator colors by the number of the clicks
+        /// </summary>
+        private static int colorButtonClicksCount = 0;
+        private void ColorButton_Click(object sender, EventArgs e)
+        {
+            int divider = 6;
+            if (colorButtonClicksCount % divider == 0)
+            {
+                this.UserInputText.ForeColor = Color.Coral;
+            }
+            else if (colorButtonClicksCount % divider == 1)
+            {
+                this.UserInputText.ForeColor = Color.MediumVioletRed;
+            }
+            else if (colorButtonClicksCount % divider == 2)
+            {
+                this.UserInputText.ForeColor = Color.Black;
+            }
+            else if (colorButtonClicksCount % divider == 3)
+            {
+                CalculatorForm.ActiveForm.BackColor = Color.Coral;
+            }
+            else if (colorButtonClicksCount % divider == 4)
+            {
+                CalculatorForm.ActiveForm.BackColor = Color.MediumVioletRed;
+            }
+            else if(colorButtonClicksCount % divider == 5)
+            {
+                CalculatorForm.ActiveForm.BackColor = Color.DarkBlue;
+            }
+            if (colorButtonClicksCount % divider == 0)
+            {
+                this.UserInputText.BackColor = Color.Coral;
+            }
+            else if (colorButtonClicksCount % divider == 1)
+            {
+                this.UserInputText.BackColor = Color.MediumVioletRed;
+            }
+            else if (colorButtonClicksCount % divider == 2)
+            {
+                this.UserInputText.BackColor = Color.DarkBlue;
+            }
+            colorButtonClicksCount++;
         }
 
         #endregion
