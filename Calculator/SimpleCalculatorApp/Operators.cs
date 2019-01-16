@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace SimpleCalculatorApp
 {
+    #region Enum Operators: + - x /
+
     struct Operators
     {
         public static string Plus { get { return " + "; } }
@@ -13,4 +15,6 @@ namespace SimpleCalculatorApp
         public static string Multi { get { return " x "; } }
         public static string Divide { get { return " / "; } }
     }
+
+    #endregion
 }

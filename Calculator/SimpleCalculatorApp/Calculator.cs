@@ -61,6 +61,7 @@ namespace SimpleCalculatorApp
                 int lastIndex = this.UserInputText.Text.Length - 1;
                 this.UserInputText.Text = this.UserInputText.Text.Remove(lastIndex);
             }
+            OnFocusInputText();
         }
 
         #endregion
@@ -111,70 +112,52 @@ namespace SimpleCalculatorApp
 
         private void ZeroButton_Click(object sender, EventArgs e)
         {
-
+            AddNumberToUserInputTextBox("0");
         }
 
         private void OneButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "1");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("1");
         }
 
         private void TwoButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "2");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("2");
         }
 
         private void ThreeButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "3");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("3");
         }
 
         private void FourButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "4");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("4");
         }
 
         private void FiveButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "5");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("5");
         }
 
         private void SixButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "6");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("6");
         }
 
         private void SevenButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "7");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("7");
         }
 
         private void EightButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "8");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("8");
         }
 
         private void NineButton_Click(object sender, EventArgs e)
         {
-            string userInput = this.UserInputText.Text;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, "9");
-            this.UserInputText.Text = userInput;
+            AddNumberToUserInputTextBox("9");
         }
 
         #endregion
@@ -195,9 +178,47 @@ namespace SimpleCalculatorApp
 
         #region Private Helpers Methods
 
+        /// <summary>
+        /// using this method to focus the User Input Text Box 
+        /// </summary>
         private void OnFocusInputText()
         {
             UserInputText.Focus();
+        }
+
+        /// <summary>
+        /// using this method to prevent the repeats of the 0 in the User Input Text Box 
+        /// not using this method because the method UserInputBoxAddNumber() is having the job done
+        /// </summary>
+        private bool IsZero(string text)
+        {
+            if (text.Length == 1)
+            {
+                if (text[0] == '0')
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// using this method to add the button clicked number to the User Input Text Box
+        /// </summary>
+        /// <param name="value">get the string to write in the UIBox</param>
+        private void AddNumberToUserInputTextBox(string value)
+        {
+            string userInput = this.UserInputText.Text;
+            int cursorIndex = this.UserInputText.SelectionStart;
+            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, value, cursorIndex);
+            this.UserInputText.Text = userInput;
         }
 
         #endregion
