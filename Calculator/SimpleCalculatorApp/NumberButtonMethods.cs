@@ -31,6 +31,7 @@ namespace SimpleCalculatorApp
 
         #endregion
 
+        #region Not Used reverse string method
 
         /// <summary>
         /// Revering the string 
@@ -49,6 +50,8 @@ namespace SimpleCalculatorApp
             return sb.ToString();
         }
 
+        #endregion
+
         #region Bool Method For Repeats of the operators
 
         /// <summary>
@@ -63,14 +66,10 @@ namespace SimpleCalculatorApp
             {
                 int lastIndex = s.Length;
                 int index = s.Length - 3;
-                if (((s.Substring(index).Equals(Operators.Divide)) ||
-                        (s.Substring(index).Equals(Operators.Minus)) ||
-                        (s.Substring(index).Equals(Operators.Multi)) ||
-                        (s.Substring(index).Equals(Operators.Plus))) ||
-                        (s[lastIndex - 1].Equals('/')) ||
-                        (s[lastIndex - 1].Equals('-')) ||
-                        (s[lastIndex - 1].Equals('x')) ||
-                        (s[lastIndex - 1].Equals('+')))
+                if ((s.Contains(Operators.Divide)) ||
+                        (s.Contains(Operators.Minus)) ||
+                        (s.Contains(Operators.Multi)) ||
+                        (s.Contains(Operators.Plus)))
                 {
                     return true;
                 }

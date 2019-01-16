@@ -72,7 +72,7 @@ namespace SimpleCalculatorApp
         {
             if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
             {
-                this.UserInputText.Text += Operators.Divide;
+                this.UserInputText.Text += $" {Operators.Divide} ";
             }
         }
 
@@ -80,7 +80,7 @@ namespace SimpleCalculatorApp
         {
             if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
             {
-                this.UserInputText.Text += Operators.Multi;
+                this.UserInputText.Text += $" {Operators.Multi} ";
             }
         }
 
@@ -88,7 +88,7 @@ namespace SimpleCalculatorApp
         {
             if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
             {
-                this.UserInputText.Text += Operators.Minus;
+                this.UserInputText.Text += $" {Operators.Minus} ";
             }
         }
 
@@ -97,13 +97,13 @@ namespace SimpleCalculatorApp
         {
             if (!NumberButtonMethods.IsRepeating(this.UserInputText.Text))
             {
-                this.UserInputText.Text += Operators.Plus;
+                this.UserInputText.Text += $" {Operators.Plus} ";
             }
         }
 
         private void EqualsButton_Click(object sender, EventArgs e)
         {
-            //to return answer
+            ExpressionResult.GetExpressionResult(this.UserInputText.Text);
         }
 
         #endregion
@@ -230,6 +230,6 @@ namespace SimpleCalculatorApp
         }
 
         #endregion
-              
+
     }
 }
