@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,9 +30,14 @@ namespace SimpleCalculatorApp
 
         #region Calculator Load Method
 
+        /// <summary>
+        /// what happens in the start of the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Calculator_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         #endregion
@@ -78,6 +84,7 @@ namespace SimpleCalculatorApp
             {
                 ReplaceOperator(Operators.Divide);
             }
+            OnFocusInputText();
         }
 
         private void MultiButton_Click(object sender, EventArgs e)
@@ -90,6 +97,7 @@ namespace SimpleCalculatorApp
             {
                 ReplaceOperator(Operators.Multi);
             }
+            OnFocusInputText();
         }
 
         private void MinusButton_Click(object sender, EventArgs e)
@@ -102,6 +110,7 @@ namespace SimpleCalculatorApp
             {
                 ReplaceOperator(Operators.Minus);
             }
+            OnFocusInputText();
         }
 
         private void PlusButton_Click(object sender, EventArgs e)
@@ -114,13 +123,29 @@ namespace SimpleCalculatorApp
             {
                 ReplaceOperator(Operators.Plus);
             }
+            OnFocusInputText();
         }
 
         private void EqualsButton_Click(object sender, EventArgs e)
         {
             if (IsResultable(this.UserInputText.Text))
             {
-                this.UserInputText.Text = ExpressionResult.GetExpressionResult(this.UserInputText.Text);
+                try
+                {
+                    this.UserInputText.Text = ExpressionResult.GetExpressionResult(this.UserInputText.Text);
+                }
+                catch (OverflowException)
+                {
+                    ShowMessageBox("Value was either too large or too small!");
+                }
+                catch (DivideByZeroException)
+                {                   
+                        this.UserInputText.Text = "+Infinity";                   
+                }
+                finally
+                {
+                    OnFocusInputText();
+                }              
             }
         }
 
@@ -128,6 +153,12 @@ namespace SimpleCalculatorApp
 
         #region EqualsButton main verifications method(s)
 
+        /// <summary>
+        /// The method is checking if the User input text is a Valid Operation by calling IsValidExpression() and returns bool
+        /// if not showing a message box to the user with text in it  
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         private bool IsResultable(string text)
         {
             if (IsValidExpression(text))
@@ -152,7 +183,7 @@ namespace SimpleCalculatorApp
         private bool IsValidExpression(string text)
         {
             string[] values = text.Split(new char[] { '+', '-', 'x', '/' }, StringSplitOptions.RemoveEmptyEntries);
-            double un = 0;
+            decimal un = 0;
             if (text.Length < 3)
             {
                 return false;
@@ -161,8 +192,7 @@ namespace SimpleCalculatorApp
             {
                 return false;
             }
-
-            else if ((double.TryParse(values[0], out un)) && (double.TryParse(values[1], out un)))
+            else if ((decimal.TryParse(values[0], out un)) && (decimal.TryParse(values[1], out un)))
             {
                 return true;
             }
@@ -172,6 +202,10 @@ namespace SimpleCalculatorApp
             }
         }
 
+        /// <summary>
+        /// When invoked show a message box to the user with text
+        /// </summary>
+        /// <param name="text"></param>
         private static void ShowMessageBox(string text)
         {
             MessageBox.Show(text);
@@ -181,6 +215,11 @@ namespace SimpleCalculatorApp
 
         #region Number Methods
 
+        /// <summary>
+        /// The methods linked to Number Buttons 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ZeroButton_Click(object sender, EventArgs e)
         {
             AddNumberToUserInputTextBox("0");
@@ -232,8 +271,10 @@ namespace SimpleCalculatorApp
         }
 
         #endregion
-        //remove bug where cant have 2 dots in the separate 2,0 + 2,1 , and dot doesnt work for expression result
+
         #region Dot Method
+
+        //TODO: remove bug where cant have 2 dots in the separate 2,0 + 2,1 , and dot doesnt work for expression result
 
         /// <summary>
         /// checking if there is already "." in the User Input String Box 
@@ -262,7 +303,7 @@ namespace SimpleCalculatorApp
         /// </summary>
         private void OnFocusInputText()
         {
-            UserInputText.Focus();
+            //UserInputText.Focus();
         }
 
         /// <summary>
@@ -294,9 +335,8 @@ namespace SimpleCalculatorApp
         /// <param name="value">get the string to write in the UIBox</param>
         private void AddNumberToUserInputTextBox(string value)
         {
-            string userInput = this.UserInputText.Text;
-            int cursorIndex = this.UserInputText.SelectionStart;
-            NumberButtonMethods.UserInputBoxAddNumber(ref userInput, value, cursorIndex);
+            string userInput = this.UserInputText.Text;           
+            MainButtonMethods.UserInputBoxAddNumber(ref userInput, value);
             this.UserInputText.Text = userInput;
         }
 
@@ -368,7 +408,7 @@ namespace SimpleCalculatorApp
         #region Changing Calculator's color
 
         /// <summary>
-        /// changing the calculator colors by the number of the clicks
+        /// Fun method for changing the calculator colors by the number of the clicks
         /// </summary>
         private static int colorButtonClicksCount = 0;
         private void ColorButton_Click(object sender, EventArgs e)
@@ -413,6 +453,6 @@ namespace SimpleCalculatorApp
             colorButtonClicksCount++;
         }
 
-        #endregion
+        #endregion               
     }
 }

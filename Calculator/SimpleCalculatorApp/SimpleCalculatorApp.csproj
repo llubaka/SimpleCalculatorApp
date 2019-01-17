@@ -53,7 +53,7 @@
       <DependentUpon>Calculator.cs</DependentUpon>
     </Compile>
     <Compile Include="ExpressionResult.cs" />
-    <Compile Include="NumberButtonMethods.cs" />
+    <Compile Include="MainButtonMethods.cs" />
     <Compile Include="Operators.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

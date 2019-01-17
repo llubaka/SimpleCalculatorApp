@@ -14,6 +14,11 @@ namespace SimpleCalculatorApp
     /// </summary>
     class ExpressionResult
     {
+        /// <summary>
+        /// the public method used to calculate an expression , by calling the other private methods in this class
+        /// </summary>
+        /// <param name="userInputText"></param>
+        /// <returns></returns>
         public static string GetExpressionResult(string userInputText)
         {
             string[] values = userInputText.Split(new char[] { '+', 'x', '-', '/' }, StringSplitOptions.RemoveEmptyEntries);
@@ -24,29 +29,45 @@ namespace SimpleCalculatorApp
             return result;
         }
 
+        /// <summary>
+        /// the calculating method
+        /// </summary>
+        /// <param name="firstOperand"></param>
+        /// <param name="secondOperand"></param>
+        /// <param name="operation"></param>
+        /// <returns></returns>
         private static string CalculateExpression(string firstOperand, string secondOperand, string operation)
         {
-            double f = double.Parse(firstOperand);
-            double s = double.Parse(secondOperand);
+            decimal f = decimal.Parse(firstOperand);
+            decimal s = decimal.Parse(secondOperand);
 
-            if (operation.Equals("+")) 
+            if (s==0)
+            {
+                return "-Infinity";
+            }
+            else if (operation.Equals("+")) 
             {
                 return (f + s).ToString();
-            }
-            else if (operation.Equals("-"))
-            {
-                return (f - s).ToString();
             }
             else if (operation.Equals("x"))
             {
                 return (f * s).ToString();
             }
-            else 
+            else if (operation.Equals("/"))
             {
                 return (f / s).ToString();
             }
+            else 
+            {
+                return (f - s).ToString();
+            }
         }
 
+        /// <summary>
+        /// checking an expression (the given string s) and returning the operator coitaned
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         private static string GetOperator(string s)
         {            
             if (s.Contains(Operators.Plus))
@@ -67,6 +88,11 @@ namespace SimpleCalculatorApp
             }           
         }
 
+        /// <summary>
+        /// Removing the white spaces from the given string , by calling the Recursive method CallRecursiveMethod()
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         private static string RemoveWhiteSpaces(string s)
         {
             string referedStr = s;
@@ -74,6 +100,12 @@ namespace SimpleCalculatorApp
             return referedStr;
         }
 
+        /// <summary>
+        /// Recursively checking all the symbols in the given string and removing the white space
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="index"></param>
+        /// <param name="length"></param>
         private static void CallRecursiveMethod(ref string s, int index, int length)
         {
             if (index == length)

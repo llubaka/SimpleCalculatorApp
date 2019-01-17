@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SimpleCalculatorApp
 {
-    class NumberButtonMethods
-    {
+    /// <summary>
+    /// some main methods used for the NumberButtons
+    /// </summary>
+    class MainButtonMethods
+    {       
         #region User Input Box Add Number
 
         /// <summary>
@@ -16,7 +19,7 @@ namespace SimpleCalculatorApp
         /// if its not this method is adding the digit (button clicked) to the sequence
         /// </summary>
         /// <param name="userInputText"></param>
-        public static void UserInputBoxAddNumber(ref string userInputText, string digit, int cursorIndex)
+        public static void UserInputBoxAddNumber(ref string userInputText, string digit)
         {
             if (userInputText.Length == 1 && userInputText[0] == '0')
             {
@@ -25,7 +28,6 @@ namespace SimpleCalculatorApp
             else
             {
                 userInputText += digit;
-
             }
         }
 

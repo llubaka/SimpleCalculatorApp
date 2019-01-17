@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SimpleCalculatorApp
 {
-    #region Enum Operators: + - x /
+    #region Struct Operators: + - x /
 
+    /// <summary>
+    /// The struct operators
+    /// </summary>
     struct Operators
     {
         public static string Plus { get { return "+"; } }
